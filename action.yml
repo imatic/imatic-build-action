@@ -5,6 +5,14 @@ inputs:
     description: "The path to docker-compose file."
     required: true
     default: "./docker-compose.yml"
+  build:
+    description: "Build images"
+    required: false
+    default: "true"
+  push:
+    description: "Push images"
+    required: false
+    default: "true"
   registry:
     description: "The name of the docker registry to push to."
     required: true
@@ -19,5 +27,11 @@ runs:
         echo "PROJECT_VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
     - name: Build
       shell: bash
+      if: ${{ inputs.build == true || inputs.build == 'true' }}
       run: |
-        docker compose -f ${{ inputs.docker_compose_file }} build --push
+        docker compose -f ${{ inputs.docker_compose_file }} build
+    - name: Push
+      shell: bash
+      if: ${{ inputs.push == true || inputs.push == 'true' }}
+      run: |
+        docker compose -f ${{ inputs.docker_compose_file }} push
