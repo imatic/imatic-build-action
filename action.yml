@@ -17,14 +17,25 @@ inputs:
     description: "The name of the docker registry to push to."
     required: true
     default: "ghcr.io"
+outputs:
+  project-image:
+    description: "The name of the image."
+    value: ${{ steps.env.outputs.project-image }}
+  project-version:
+    description: "The version of the image."
+    value: ${{ steps.env.outputs.project-version }}
 runs:
   using: "composite"
   steps:
-    - name: Set env variables
+    - id: env
+      name: Set env variables
       shell: bash
       run: |
+        PROJECT_IM
         echo "PROJECT_IMAGE=${{ inputs.registry }}/${{ github.repository }}" >> $GITHUB_ENV
         echo "PROJECT_VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        echo "project-image=${{ inputs.registry }}/${{ github.repository }}" >> $GITHUB_OUTPUT
+        echo "project-version=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
     - name: Build
       shell: bash
       if: ${{ inputs.build == true || inputs.build == 'true' }}
