@@ -31,11 +31,12 @@ runs:
       name: Set env variables
       shell: bash
       run: |
-        PROJECT_IM
-        echo "PROJECT_IMAGE=${{ inputs.registry }}/${{ github.repository }}" >> $GITHUB_ENV
-        echo "PROJECT_VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-        echo "project-image=${{ inputs.registry }}/${{ github.repository }}" >> $GITHUB_OUTPUT
-        echo "project-version=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+        PROJECT_IMAGE=${{ inputs.registry }}/${{ github.repository }}
+        PROJECT_VERSION=$(git rev-parse --short HEAD)
+        echo "PROJECT_IMAGE=$PROJECT_IMAGE" >> $GITHUB_ENV
+        echo "PROJECT_VERSION=$PROJECT_VERSION" >> $GITHUB_ENV
+        echo "project-image=$PROJECT_IMAGE" >> $GITHUB_OUTPUT
+        echo "project-version=$PROJECT_VERSION" >> $GITHUB_OUTPUT
     - name: Build
       shell: bash
       if: ${{ inputs.build == true || inputs.build == 'true' }}
