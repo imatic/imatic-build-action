@@ -41,9 +41,9 @@ runs:
       shell: bash
       if: ${{ inputs.build == true || inputs.build == 'true' }}
       run: |
-        docker compose -f ${{ inputs.docker_compose_file }} build
+        docker compose --progress=quiet -f ${{ inputs.docker_compose_file }} build
     - name: Push
       shell: bash
       if: ${{ inputs.push == true || inputs.push == 'true' }}
       run: |
-        docker compose -f ${{ inputs.docker_compose_file }} push
+        docker compose --progress=quiet -f ${{ inputs.docker_compose_file }} push

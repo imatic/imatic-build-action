@@ -17,9 +17,20 @@ services:
       context: .
       args:
         - MY_APP_VERSION=${PROJECT_VERSION:-latest}
-      tags:
-        - ${PROJECT_IMAGE:-my-project-name}:${PROJECT_VERSION:-latest}
 ```
+
+These variables are also returned in output of this action as `project-image`
+and `project-version` respectively. Use these if you need to spin up built
+images in the workflow.
+
+## Options
+
+You can specify following options in `with` section of this action:
+
+- `registry` - registry to push images to. Default is `ghcr.io`.
+- `build` - build images. Default is `true`.
+- `push` - push images to registry. Default is `true`.
+- `docker_compose_file` - path to docker-compose file. Default is `docker-compose.yml`.
 
 ## Usage in workflow
 
