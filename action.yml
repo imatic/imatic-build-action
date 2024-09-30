@@ -35,7 +35,7 @@ runs:
       name: Set env variables
       shell: bash
       run: |
-        PROJECT_IMAGE=${{ inputs.registry }}/${{ github.repository }}${{ inputs.service }}
+        PROJECT_IMAGE=${{ inputs.registry }}/${{ github.repository }}
         PROJECT_VERSION=$(git rev-parse --short HEAD)
         echo "PROJECT_IMAGE=$PROJECT_IMAGE" >> $GITHUB_ENV
         echo "PROJECT_VERSION=$PROJECT_VERSION" >> $GITHUB_ENV
