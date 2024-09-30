@@ -50,4 +50,4 @@ runs:
       shell: bash
       if: ${{ inputs.push == true || inputs.push == 'true' }}
       run: |
-        docker compose --progress=plain -f ${{ inputs.docker_compose_file }} push
+        docker compose --progress=plain -f ${{ inputs.docker_compose_file }} push ${{ inputs.service }}
